@@ -3,27 +3,18 @@
 	"id": "betterlogviewer",
 	"version": "${version}",
 	"name": "BetterLogViewer",
-	"description": "This is an example description! Tell everyone what your mod is about!",
 	"authors": [
-		"Me!"
+		"DarkCray_"
 	],
-	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
-	},
 	"license": "MIT",
 	"icon": "assets/betterlogviewer/icon.png",
-	"environment": "*",
+	"environment": "client",
 	"entrypoints": {
-		"main": [
-			"me.darkcray_.betterlogviewer.BetterLogViewer"
-		],
 		"client": [
-			"me.darkcray_.betterlogviewer.client.BetterLogViewerClient"
+			"me.darkcray_.betterlogviewer.BetterLogViewerClient"
 		]
 	},
 	"mixins": [
-		"betterlogviewer.mixins.json",
 		{
 			"config": "betterlogviewer.client.mixins.json",
 			"environment": "client"

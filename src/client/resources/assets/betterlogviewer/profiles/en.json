@@ -1,0 +1,11 @@
+{
+  "id": "en",
+  "header": "(?i)^-----\\s+CoreProtect\\s*\\|\\s*Lookup\\s+Results\\s+-----$",
+  "containerHeader": "(?i)^----- Container Transactions ----- \\(x.*\\)$",
+  "interactionHeader": "(?i)^----- Player Interactions ----- \\(x.*\\)$",
+  "row": "^\\d+(?:[.,]\\d+)?\\s*/?\\s*[A-Za-z]+ ago [+-] (?<player>[#A-Za-z0-9_.-]+) (?<verb>placed|broke|added|removed|clicked|killed|picked up|dropped|deposited|withdrew|threw|shot) (?:(?:x(?<amount>\\d+)) )?(?<material>[^ ]+)\\.$",
+  "timeUnits": {"m":60, "h":3600, "d":86400},
+  "page": "^(?:◀\\s*)?Page (?<page>\\d+)/(?<total>\\d+)(?:.*)$",
+  "noResults": ["CoreProtect - No results found.", "CoreProtect - No results found for that page.", "CoreProtect - No data found for that page."],
+  "actions": {"placed":"PLACE", "broke":"BREAK", "added":"ADD", "removed":"REMOVE", "clicked":"CLICK", "killed":"KILL", "picked up":"PICKUP", "dropped":"DROP", "deposited":"DEPOSIT", "withdrew":"WITHDRAW", "threw":"THROW", "shot":"SHOOT"}
+}
