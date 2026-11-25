@@ -14,6 +14,11 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(ChatComponent.class)
 public interface ChatAccess {
     @Accessor("allMessages") List<GuiMessage> blv$messages();
+    @Accessor("trimmedMessages") List<GuiMessage.Line> blv$lines();
+    @Accessor("chatScrollbarPos") int blv$scroll();
+    @Accessor("chatScrollbarPos") void blv$scroll(int position);
+    @Accessor("newMessageSinceScroll") boolean blv$unread();
+    @Accessor("newMessageSinceScroll") void blv$unread(boolean unread);
     @Invoker("refreshTrimmedMessages") void blv$refresh();
     @Invoker("addMessage") void blv$add(Component content, MessageSignature signature, GuiMessageSource source, GuiMessageTag tag);
     @Invoker("logChatMessage") void blv$log(GuiMessage message);

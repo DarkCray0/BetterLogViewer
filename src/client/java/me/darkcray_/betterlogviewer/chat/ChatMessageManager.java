@@ -179,7 +179,7 @@ public final class ChatMessageManager {
         int total = sessions.values().stream().mapToInt(QuerySession::retainedCount).sum();
         int replacing = session.pages.getOrDefault(capture.page, List.of()).size();
         if (total - replacing + capture.records.size() + 1 > MAX_RECORDS) return true;
-        capture.records.add(entry); session.displayTick = mc().gui.hud.getGuiTicks();
+        capture.records.add(entry);
         session.pages.put(capture.page, List.copyOf(capture.records)); session.viewedServerPage = capture.page;
         refresh(session); return false;
     }
@@ -212,7 +212,7 @@ public final class ChatMessageManager {
     private void loadServerPage(QuerySession session, int page, String command) {
         if (session.closed) return;
         if (session.pages.containsKey(page)) {
-            session.viewedServerPage = page; session.displayTick = mc().gui.hud.getGuiTicks(); refresh(session); return;
+            session.viewedServerPage = page; refresh(session); return;
         }
         if (serverContext != session || session.loading || page < 1 || page > session.totalServerPages) return;
         queue.enqueue(new LookupQueue.Request(session, command, page));
@@ -235,11 +235,46 @@ public final class ChatMessageManager {
             GuiMessage old = messages.get(i);
             if (old.content() == session.displayed) {
                 var replacement = build(session);
-                messages.set(i, new GuiMessage(Math.max(old.addedTime(), session.displayTick), replacement, old.signature(), old.source(), old.tag()));
-                session.displayed = replacement; chat().blv$refresh(); return;
+                var updated = new GuiMessage(old.addedTime(), replacement, old.signature(), old.source(), old.tag());
+                messages.set(i, updated);
+                session.displayed = replacement; rebuildChat(old, updated); return;
             }
         }
         actions.remove(session.id);
+    }
+
+    private void rebuildChat(GuiMessage previous, GuiMessage replacement) {
+        var access = chat();
+        int scroll = access.blv$scroll();
+        boolean unread = access.blv$unread();
+        var lines = access.blv$lines();
+        GuiMessage.Line anchor = scroll > 0 && scroll < lines.size() ? lines.get(scroll) : null;
+        int offset = 0;
+        if (anchor != null) {
+            int start = scroll;
+            while (start > 0 && lines.get(start - 1).parent() == anchor.parent()) start--;
+            offset = scroll - start;
+        }
+
+        access.blv$scroll(0);
+        access.blv$refresh();
+
+        int restored = scroll;
+        if (anchor != null) {
+            var parent = anchor.parent() == previous ? replacement : anchor.parent();
+            int start = -1, end = -1;
+            for (int i = 0; i < lines.size(); i++) {
+                if (lines.get(i).parent() == parent) {
+                    if (start < 0) start = i;
+                    end = i;
+                }
+            }
+            if (start >= 0) restored = start + Math.min(offset, end - start);
+        }
+        int maximum = Math.max(0, lines.size() - mc().gui.hud.getChat().getLinesPerPage());
+        restored = Math.clamp(restored, 0, maximum);
+        access.blv$scroll(restored);
+        access.blv$unread(unread && restored > 0);
     }
 
     private void refreshAll() { for (var session : List.copyOf(sessions.values())) refresh(session); }

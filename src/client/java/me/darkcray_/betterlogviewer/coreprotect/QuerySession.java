@@ -10,7 +10,7 @@ public final class QuerySession {
     public LanguageProfile language;
     public boolean inspection;
     public boolean closed, loading;
-    public int lastServerPage = 1, viewedServerPage = 1, totalServerPages = 1, displayTick;
+    public int lastServerPage = 1, viewedServerPage = 1, totalServerPages = 1;
     public Component displayed;
     public final TreeMap<Integer, List<LogEntry>> pages = new TreeMap<>();
     public final TreeMap<Integer, Component> footers = new TreeMap<>();
