@@ -3,11 +3,25 @@
 	"id": "betterlogviewer",
 	"version": "${version}",
 	"name": "BetterLogViewer",
+	"description": "BetterLogViewer makes viewing CoreProtect results more convenient. As you scroll through the pages, the content updates in place, preserving the original text, colors, tooltips, and clickable elements.",
 	"authors": [
 		"DarkCray_"
 	],
 	"license": "MIT",
 	"icon": "assets/betterlogviewer/icon.png",
+	"contact": {
+		"homepage": "https://github.com/DarkCray0/BetterLogViewer",
+		"sources": "https://github.com/DarkCray0/BetterLogViewer",
+		"issues": "https://github.com/DarkCray0/BetterLogViewer/issues"
+	},
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.modrinth": "https://modrinth.com/mod/betterlogviewer"
+			},
+			"update_checker": false
+		}
+	},
 	"environment": "client",
 	"entrypoints": {
 		"client": [
