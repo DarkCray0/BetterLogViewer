@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import me.darkcray_.betterlogviewer.compat.AdditionalChatHistory;
+import me.darkcray_.betterlogviewer.compat.ChatPlusHistory;
 import me.darkcray_.betterlogviewer.coreprotect.*;
 import me.darkcray_.betterlogviewer.mixin.ChatAccess;
 import me.darkcray_.betterlogviewer.pagination.LookupQueue;
@@ -12,6 +14,7 @@ import net.minecraft.client.multiplayer.chat.GuiMessage;
 import net.minecraft.client.multiplayer.chat.GuiMessageSource;
 import net.minecraft.client.multiplayer.chat.GuiMessageTag;
 import net.minecraft.network.chat.Component;
+import net.fabricmc.loader.api.FabricLoader;
 
 public final class ChatMessageManager {
     private static final int MAX_QUERIES = 20, MAX_RECORDS = 10_000, REQUEST_INTERVAL = 1000, REQUEST_TIMEOUT = 10;
@@ -19,6 +22,7 @@ public final class ChatMessageManager {
     public final LinkedHashMap<Long, QuerySession> sessions = new LinkedHashMap<>();
     public final LookupQueue queue;
     private final CoreProtectParser parser;
+    private final AdditionalChatHistory additionalChat = FabricLoader.getInstance().isModLoaded("chatplus") ? new ChatPlusHistory() : AdditionalChatHistory.NONE;
     private Capture capture;
     private QuerySession serverContext, pageHintSession;
     private int pageHint;
@@ -33,7 +37,6 @@ public final class ChatMessageManager {
         int page;
         List<LogEntry> previousPage;
         LogEntry pending;
-        Component pendingOriginal;
         long lastMessage = System.currentTimeMillis();
 
         Capture(QuerySession session, int page, LookupQueue.Request request) {
@@ -114,26 +117,16 @@ public final class ChatMessageManager {
             case CoreProtectParser.Row row -> {
                 if (capture.session.language == null) capture.session.language = row.profile();
                 capture.pending = null;
-                capture.pendingOriginal = null;
-                if (row.needsCoordinates()) {
-                    capture.pending = row.entry();
-                    capture.pendingOriginal = message;
-                    return false;
-                }
                 if (append(row.entry())) return false;
+                if (row.needsCoordinates()) capture.pending = row.entry();
                 log(message);
                 return true;
             }
             case CoreProtectParser.Coordinates _ when capture.pending != null -> {
                 var entry = capture.pending.withCoordinates(message);
-                if (append(entry)) {
-                    capture.pending = null;
-                    capture.pendingOriginal = null;
-                    return false;
-                }
-                chat().blv$messages().removeIf(line -> line.source() == GuiMessageSource.SYSTEM_SERVER && line.content() == capture.pendingOriginal);
+                capture.records.set(capture.records.size() - 1, entry);
+                capture.session.pages.put(capture.page, List.copyOf(capture.records));
                 capture.pending = null;
-                capture.pendingOriginal = null;
                 log(message);
                 refresh(capture.session);
                 return true;
@@ -231,16 +224,33 @@ public final class ChatMessageManager {
     public void refresh(QuerySession session) {
         if (session.closed || session.displayed == null) return;
         var messages = chat().blv$messages();
+        int index = -1;
         for (int i = 0; i < messages.size(); i++) {
-            GuiMessage old = messages.get(i);
-            if (old.content() == session.displayed) {
-                var replacement = build(session);
-                var updated = new GuiMessage(old.addedTime(), replacement, old.signature(), old.source(), old.tag());
-                messages.set(i, updated);
-                session.displayed = replacement; rebuildChat(old, updated); return;
+            if (messages.get(i).content() == session.displayed) { index = i; break; }
+        }
+        if (index < 0 && additionalChat.contains(session.id)) { actions.remove(session.id); return; }
+        var replacement = build(session);
+        if (index >= 0) {
+            GuiMessage old = messages.get(index);
+            var updated = new GuiMessage(old.addedTime(), replacement, old.signature(), old.source(), old.tag());
+            messages.set(index, updated);
+            rebuildChat(old, updated);
+        }
+        additionalChat.replace(session.id, replacement);
+        session.displayed = replacement;
+    }
+
+    public boolean ownsMessage(Component message) {
+        return sessions.values().stream().anyMatch(session -> !session.closed && session.displayed == message);
+    }
+
+    public void trackChatPlusMessage(Component original, Object tab, Object result) {
+        for (var session : sessions.values()) {
+            if (!session.closed && session.displayed == original) {
+                additionalChat.track(session.id, tab, result);
+                return;
             }
         }
-        actions.remove(session.id);
     }
 
     private void rebuildChat(GuiMessage previous, GuiMessage replacement) {
@@ -281,6 +291,7 @@ public final class ChatMessageManager {
 
     private void evict(QuerySession session) {
         session.closed = true; queue.cancel(session); actions.remove(session.id); sessions.remove(session.id);
+        additionalChat.remove(session.id);
         if (serverContext == session) serverContext = null;
         if (pageHintSession == session) pageHintSession = null;
     }
@@ -289,5 +300,6 @@ public final class ChatMessageManager {
         for (var session : List.copyOf(sessions.values())) evict(session);
         capture = null; serverContext = null; pageHintSession = null;
         queue.clear(); actions.clear(); quarantineUntil = 0; pageHintDeadline = 0;
+        additionalChat.clear();
     }
 }

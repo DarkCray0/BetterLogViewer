@@ -7,6 +7,10 @@ repositories {
 	mavenCentral()
 }
 
+base {
+	archivesName.set('BetterLogViewer')
+}
+
 loom {
 	splitEnvironmentSourceSets()
 	runs.configureEach { generateRunConfig.set(false) }
@@ -23,6 +27,7 @@ dependencies {
 	implementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
 	implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+	clientCompileOnly files('libs/chatplus-fabric-2.10.0-dev-shadow.jar')
 }
 
 processClientResources {

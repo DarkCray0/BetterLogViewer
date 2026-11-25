@@ -12,6 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class ChatScreenMixin {
     @Inject(method = "handleComponentClicked", at = @At("HEAD"), cancellable = true)
     private void blv$click(Style style, boolean insertions, CallbackInfoReturnable<Boolean> cir) {
-        if (BetterLogViewerClient.messages().actions.click(style)) cir.setReturnValue(true);
+        var messages = BetterLogViewerClient.messages();
+        if (messages != null && messages.actions.click(style)) cir.setReturnValue(true);
     }
 }

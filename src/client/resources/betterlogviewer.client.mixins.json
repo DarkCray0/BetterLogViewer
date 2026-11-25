@@ -2,7 +2,7 @@
 	"required": true,
 	"package": "me.darkcray_.betterlogviewer.mixin",
 	"compatibilityLevel": "JAVA_25",
-	"client": ["ChatAccess", "ChatComponentMixin", "ChatScreenMixin", "ClientPacketListenerMixin"],
+	"client": ["ChatAccess", "ChatComponentMixin", "ChatScreenMixin", "ClientPacketListenerMixin", "ChatPlusTabMixin", "ChatPlusCompactMixin"],
 	"injectors": {
 		"defaultRequire": 1
 	},
