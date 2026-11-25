@@ -1,0 +1,131 @@
+{
+  "id": "fr",
+  "header": "(?iu)^-----\\s+\\Q\\ECoreProtect\\s*\\|\\s*\\Q Résultats\\E\\s+-----$",
+  "containerHeader": "(?iu)^-----\\s+\\QTransactions de conteneurs\\E\\s+-----\\s+\\(x.*\\)$",
+  "interactionHeader": "(?iu)^-----\\s+\\QInteractions avec les joueurs\\E\\s+-----\\s+\\(x.*\\)$",
+  "signHeader": "(?iu)^-----\\s+\\QSigner des messages\\E\\s+-----\\s+\\(x.*\\)$",
+  "row": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qplacé\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+  "time": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E",
+  "timeUnits": {
+    "/m": 60,
+    "/h": 3600,
+    "/d": 86400
+  },
+  "page": "(?iu)^(?:◀\\s*)?\\QPage \\E(?<page>\\d+)/(?<total>\\d+)\\Q\\E.*$",
+  "noResults": [
+    "CoreProtect - Aucun résultat trouvé.",
+    "CoreProtect - Non résultats trouvé pour cette page.",
+    "CoreProtect - Non données trouvé pour cette page.",
+    "CoreProtect - Non données trouvé.",
+    "CoreProtect - Non transactions trouvé.",
+    "CoreProtect - Non interactions trouvé.",
+    "CoreProtect - Non messages trouvé."
+  ],
+  "searching": "CoreProtect - Recherche de recherche. S'il vous plaît, attendez...",
+  "actions": {
+    "placé": "PLACE",
+    "cassé": "BREAK",
+    "ajouté": "ADD",
+    "supprimé": "REMOVE",
+    "cliqué": "CLICK",
+    "tué": "KILL",
+    "ramassé": "PICKUP",
+    "lâché": "DROP",
+    "déposé": "DEPOSIT",
+    "retiré": "WITHDRAW",
+    "jeté": "THROW",
+    "tiré": "SHOOT",
+    "clicked": "CLICK",
+    "sheared": "SHEAR",
+    "leashed": "LEASH",
+    "unleashed": "UNLEASH",
+    "entrée": "LOGIN",
+    "sortie": "LOGOUT"
+  },
+  "rows": [
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qplacé\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "PLACE"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qcassé\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "BREAK"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qajouté\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "ADD"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qsupprimé\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "REMOVE"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qcliqué\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "CLICK"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qtué\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "KILL"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qramassé\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "PICKUP"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qlâché\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "DROP"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qdéposé\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "DEPOSIT"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qretiré\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "WITHDRAW"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qjeté\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "THROW"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qtiré\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "SHOOT"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qclicked\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "CLICK"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qsheared\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "SHEAR"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qleashed\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "LEASH"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qunleashed\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "UNLEASH"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q spawned \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "SPAWN"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q connecté \\E(?<verb>\\Qentrée\\E)\\Q.\\E$",
+      "action": "LOGIN"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q connecté \\E(?<verb>\\Qsortie\\E)\\Q.\\E$",
+      "action": "LOGOUT"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q connecté en tant que \\E[A-Za-z0-9_.-]+\\Q.\\E$",
+      "action": "USERNAME"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q depuis\\E [+-] (?<player>[#A-Za-z0-9_.-]+):\\s*(?<message>.*)$",
+      "action": "TEXT"
+    }
+  ]
+}

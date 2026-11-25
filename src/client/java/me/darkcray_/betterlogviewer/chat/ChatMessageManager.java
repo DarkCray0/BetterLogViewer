@@ -158,8 +158,8 @@ public final class ChatMessageManager {
         return false;
     }
 
-    private static boolean searching(String text) {
-        String lower = text.toLowerCase(Locale.ROOT); return lower.contains("search") || lower.contains("поиск");
+    private boolean searching(String text) {
+        String lower = text.toLowerCase(Locale.ROOT); return parser.searching(text) || lower.contains("search") || lower.contains("поиск");
     }
 
     private QuerySession create(Component header, LanguageProfile language) {

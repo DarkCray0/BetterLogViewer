@@ -1,0 +1,131 @@
+{
+  "id": "uk",
+  "header": "(?iu)^-----\\s+\\Q\\ECoreProtect\\s*\\|\\s*\\Q Результати\\E\\s+-----$",
+  "containerHeader": "(?iu)^-----\\s+\\QКонтейнерні операції\\E\\s+-----\\s+\\(x.*\\)$",
+  "interactionHeader": "(?iu)^-----\\s+\\QВзаємодії гравців\\E\\s+-----\\s+\\(x.*\\)$",
+  "signHeader": "(?iu)^-----\\s+\\QПідписуйте повідомлення\\E\\s+-----\\s+\\(x.*\\)$",
+  "row": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qрозміщено\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+  "time": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E",
+  "timeUnits": {
+    "/m": 60,
+    "/h": 3600,
+    "/d": 86400
+  },
+  "page": "(?iu)^(?:◀\\s*)?\\QСторінка \\E(?<page>\\d+)/(?<total>\\d+)\\Q\\E.*$",
+  "noResults": [
+    "CoreProtect - Нічого не знайдено.",
+    "CoreProtect - Ні результати знайдено для цієї сторінки.",
+    "CoreProtect - Ні дані знайдено для цієї сторінки.",
+    "CoreProtect - Ні дані знайдено.",
+    "CoreProtect - Ні транзакції знайдено.",
+    "CoreProtect - Ні взаємодії знайдено.",
+    "CoreProtect - Ні повідомлення знайдено."
+  ],
+  "searching": "CoreProtect - Пошук під час пошуку. Будь ласка, зачекайте...",
+  "actions": {
+    "розміщено": "PLACE",
+    "зламано": "BREAK",
+    "додано": "ADD",
+    "видалено": "REMOVE",
+    "натиснув": "CLICK",
+    "убитий": "KILL",
+    "взяв": "PICKUP",
+    "скинув": "DROP",
+    "здано на зберігання": "DEPOSIT",
+    "вилучено": "WITHDRAW",
+    "кинув": "THROW",
+    "постріл": "SHOOT",
+    "clicked": "CLICK",
+    "sheared": "SHEAR",
+    "leashed": "LEASH",
+    "unleashed": "UNLEASH",
+    "в": "LOGIN",
+    "з ~ ~": "LOGOUT"
+  },
+  "rows": [
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qрозміщено\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "PLACE"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qзламано\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "BREAK"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qдодано\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "ADD"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qвидалено\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "REMOVE"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qнатиснув\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "CLICK"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qубитий\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "KILL"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qвзяв\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "PICKUP"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qскинув\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "DROP"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qздано на зберігання\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "DEPOSIT"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qвилучено\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "WITHDRAW"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qкинув\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "THROW"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qпостріл\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "SHOOT"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qclicked\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "CLICK"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qsheared\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "SHEAR"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qleashed\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "LEASH"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qunleashed\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "UNLEASH"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q spawned \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "SPAWN"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q зареєстрований \\E(?<verb>\\Qв\\E)\\Q.\\E$",
+      "action": "LOGIN"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q зареєстрований \\E(?<verb>\\Qз ~ ~\\E)\\Q.\\E$",
+      "action": "LOGOUT"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q Ви увійшли як \\E[A-Za-z0-9_.-]+\\Q.\\E$",
+      "action": "USERNAME"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q тому\\E [+-] (?<player>[#A-Za-z0-9_.-]+):\\s*(?<message>.*)$",
+      "action": "TEXT"
+    }
+  ]
+}

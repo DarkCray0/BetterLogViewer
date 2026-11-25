@@ -1,0 +1,131 @@
+{
+  "id": "es",
+  "header": "(?iu)^-----\\s+\\Q\\ECoreProtect\\s*\\|\\s*\\Q Resultados\\E\\s+-----$",
+  "containerHeader": "(?iu)^-----\\s+\\QTransacciones del contenedor\\E\\s+-----\\s+\\(x.*\\)$",
+  "interactionHeader": "(?iu)^-----\\s+\\QInteracciones del jugador\\E\\s+-----\\s+\\(x.*\\)$",
+  "signHeader": "(?iu)^-----\\s+\\QMensajes de cartel\\E\\s+-----\\s+\\(x.*\\)$",
+  "row": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qcolocó\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+  "time": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E",
+  "timeUnits": {
+    "/m": 60,
+    "/h": 3600,
+    "/d": 86400
+  },
+  "page": "(?iu)^(?:◀\\s*)?\\QPágina \\E(?<page>\\d+)/(?<total>\\d+)\\Q\\E.*$",
+  "noResults": [
+    "CoreProtect - No se hallaron resultados.",
+    "CoreProtect - Sin resultados encontados para esta página.",
+    "CoreProtect - Sin datos encontados para esta página.",
+    "CoreProtect - Sin datos encontrados acá.",
+    "CoreProtect - Sin transacciones encontrados acá.",
+    "CoreProtect - Sin interacciones encontrados acá.",
+    "CoreProtect - Sin mensajes encontrados acá."
+  ],
+  "searching": "CoreProtect - Busqueda iniciada. Espere...",
+  "actions": {
+    "colocó": "PLACE",
+    "rompió": "BREAK",
+    "agregó": "ADD",
+    "removió": "REMOVE",
+    "clickeó": "CLICK",
+    "mató": "KILL",
+    "recogió": "PICKUP",
+    "soltó": "DROP",
+    "depositó": "DEPOSIT",
+    "retiró": "WITHDRAW",
+    "tiró": "THROW",
+    "disparó": "SHOOT",
+    "clicked": "CLICK",
+    "sheared": "SHEAR",
+    "leashed": "LEASH",
+    "unleashed": "UNLEASH",
+    "entrado": "LOGIN",
+    "salido": "LOGOUT"
+  },
+  "rows": [
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qcolocó\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "PLACE"
+    },
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qrompió\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "BREAK"
+    },
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qagregó\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "ADD"
+    },
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qremovió\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "REMOVE"
+    },
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qclickeó\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "CLICK"
+    },
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qmató\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "KILL"
+    },
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qrecogió\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "PICKUP"
+    },
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qsoltó\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "DROP"
+    },
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qdepositó\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "DEPOSIT"
+    },
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qretiró\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "WITHDRAW"
+    },
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qtiró\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "THROW"
+    },
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qdisparó\\E)\\Q \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "SHOOT"
+    },
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qclicked\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "CLICK"
+    },
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qsheared\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "SHEAR"
+    },
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qleashed\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "LEASH"
+    },
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qunleashed\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "UNLEASH"
+    },
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q spawned \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "SPAWN"
+    },
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q ha \\E(?<verb>\\Qentrado\\E)\\Q.\\E$",
+      "action": "LOGIN"
+    },
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q ha \\E(?<verb>\\Qsalido\\E)\\Q.\\E$",
+      "action": "LOGOUT"
+    },
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q entró como \\E[A-Za-z0-9_.-]+\\Q.\\E$",
+      "action": "USERNAME"
+    },
+    {
+      "pattern": "(?iu)^\\QHace \\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q\\E [+-] (?<player>[#A-Za-z0-9_.-]+):\\s*(?<message>.*)$",
+      "action": "TEXT"
+    }
+  ]
+}

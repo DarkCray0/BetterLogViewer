@@ -31,27 +31,27 @@ public final class CoreProtectParser {
     public Optional<Result> parse(Component message, LanguageProfile active, boolean inspection) {
         String text = CoreProtectText.plain(message);
         for (var profile : profiles) {
-            if (profile.headerPattern.matcher(text).matches()) return Optional.of(new Header(profile, false));
-            boolean container = profile.containerPattern != null && profile.containerPattern.matcher(text).matches();
-            boolean interaction = profile.interactionPattern != null && profile.interactionPattern.matcher(text).matches();
-            if ((container || interaction) && isInspection(message)) return Optional.of(new Header(profile, true));
+            if (profile.lookupHeader(text)) return Optional.of(new Header(profile, false));
+            if (profile.inspectionHeader(text) && isInspection(message)) return Optional.of(new Header(profile, true));
         }
         if (INSPECT.matcher(text).matches() && isInspection(message)) return Optional.of(new Header(null, true));
         if (active == null && !inspection) return Optional.empty();
         var candidates = active != null ? List.of(active) : profiles;
         for (var profile : candidates) {
-            var footer = profile.pagePattern.matcher(text);
-            if (footer.matches()) {
+            var footerMatch = profile.page(text);
+            if (footerMatch.isPresent()) {
                 try {
+                    var footer = footerMatch.get();
                     int page = Integer.parseInt(footer.group("page")), total = Integer.parseInt(footer.group("total"));
                     if (page > 0 && total >= page) return Optional.of(new Footer(page, total));
                 } catch (RuntimeException ignored) { }
             }
             if (profile.noResults.stream().anyMatch(text::equals)) return Optional.of(new Empty());
-            var row = profile.rowPattern.matcher(text);
-            if (!row.matches()) continue;
+            var rowMatch = profile.row(text);
+            if (rowMatch.isEmpty()) continue;
+            var row = rowMatch.get();
             try {
-                var action = LogAction.valueOf(profile.actions.get(row.group("verb").toLowerCase(Locale.ROOT)));
+                var action = row.action();
                 var times = new ArrayList<Instant>();
                 var details = new ArrayList<Component>();
                 boolean[] strike = {false};
@@ -68,28 +68,33 @@ public final class CoreProtectParser {
                 boolean exactTime = !times.isEmpty();
                 if (!exactTime) {
                     if (!colored[0] || profile.timeUnits == null) return Optional.empty();
-                    var age = Pattern.compile("^(\\d+(?:[.,]\\d+)?)\\s*/?\\s*([\\p{L}]+)\\s+").matcher(text);
+                    var age = profile.timePattern.matcher(text);
                     if (!age.find()) return Optional.empty();
-                    Integer multiplier = profile.timeUnits.get(age.group(2).toLowerCase(Locale.ROOT));
+                    Integer multiplier = profile.timeUnits.get(age.group("unit").toLowerCase(Locale.ROOT));
                     if (multiplier == null) return Optional.empty();
-                    double elapsed = Double.parseDouble(age.group(1).replace(',', '.')) * multiplier;
+                    double elapsed = Double.parseDouble(age.group("age").replace(',', '.')) * multiplier;
                     if (!Double.isFinite(elapsed) || elapsed > 31536000000L) return Optional.empty();
                     times.add(Instant.now().minusSeconds((long)elapsed));
                 }
-                String amountText = row.group("amount");
+                String amountText = row.field("amount");
                 if (action.itemChange() && amountText == null) return Optional.empty();
                 int amount = amountText == null ? 1 : Integer.parseInt(amountText);
                 if (amount < 1) return Optional.empty();
-                String material = row.group("material").replace("(↓)", "").toLowerCase(Locale.ROOT);
-                if (!material.matches("(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?")) return Optional.empty();
-                if (!material.contains(":")) material = "minecraft:" + material;
-                var entry = new LogEntry(LogEntry.nextId(), row.group("player"), action, material, amount, times.getFirst(), exactTime, strike[0], List.of(message), distinct(details));
+                String material = row.field("material");
+                if (material != null) {
+                    material = material.replace("(↓)", "").toLowerCase(Locale.ROOT);
+                    if (!material.matches("(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?")) return Optional.empty();
+                    if (!material.contains(":")) material = "minecraft:" + material;
+                }
+                var entry = new LogEntry(LogEntry.nextId(), row.field("player"), action, material, amount, times.getFirst(), exactTime, strike[0], List.of(message), distinct(details));
                 return Optional.of(new Row(entry, profile, !inspection && !hasCoordinates(message)));
             } catch (RuntimeException ignored) { return Optional.empty(); }
         }
         if ((text.startsWith("^ ") || text.startsWith("(x")) && hasCoordinates(message)) return Optional.of(new Coordinates());
         return Optional.empty();
     }
+
+    public boolean searching(String text) { return profiles.stream().anyMatch(profile -> profile.searching(text)); }
 
     private static List<Component> distinct(List<Component> values) {
         var result = new ArrayList<Component>();

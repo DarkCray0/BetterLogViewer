@@ -1,0 +1,131 @@
+{
+  "id": "ja",
+  "header": "(?iu)^-----\\s+\\Q\\ECoreProtect\\s*\\|\\s*\\Q の検索結果\\E\\s+-----$",
+  "containerHeader": "(?iu)^-----\\s+\\Qコンテナのトランザクション\\E\\s+-----\\s+\\(x.*\\)$",
+  "interactionHeader": "(?iu)^-----\\s+\\Qプレイヤーの相互作用\\E\\s+-----\\s+\\(x.*\\)$",
+  "signHeader": "(?iu)^-----\\s+\\Q看板のメッセージ\\E\\s+-----\\s+\\(x.*\\)$",
+  "row": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Qが\\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Qを\\E(?<verb>\\Q設置した\\E)\\Q\\E$",
+  "time": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E",
+  "timeUnits": {
+    "/m": 60,
+    "/h": 3600,
+    "/d": 86400
+  },
+  "page": "(?iu)^(?:◀\\s*)?\\Q\\E(?<page>\\d+)/(?<total>\\d+)\\Q ページ目\\E.*$",
+  "noResults": [
+    "CoreProtect - 結果が見つかりませんでした",
+    "CoreProtect - このページには結果は見つかりませんでした",
+    "CoreProtect - このページにはデータは見つかりませんでした",
+    "CoreProtect - この場所にはデータが見つかりませんでした",
+    "CoreProtect - この場所にはトランザクションが見つかりませんでした",
+    "CoreProtect - この場所には相互作用が見つかりませんでした",
+    "CoreProtect - この場所にはメッセージが見つかりませんでした"
+  ],
+  "searching": "CoreProtect - 検索中。しばらくお待ちください...",
+  "actions": {
+    "設置した": "PLACE",
+    "破壊した": "BREAK",
+    "追加した": "ADD",
+    "取り出した": "REMOVE",
+    "クリックした": "CLICK",
+    "殺害した": "KILL",
+    "拾った": "PICKUP",
+    "落とした": "DROP",
+    "預け入れた": "DEPOSIT",
+    "引き出した": "WITHDRAW",
+    "投げた": "THROW",
+    "撃った": "SHOOT",
+    "clicked": "CLICK",
+    "sheared": "SHEAR",
+    "leashed": "LEASH",
+    "unleashed": "UNLEASH",
+    "ログイン": "LOGIN",
+    "ログアウト": "LOGOUT"
+  },
+  "rows": [
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Qが\\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Qを\\E(?<verb>\\Q設置した\\E)\\Q\\E$",
+      "action": "PLACE"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Qが\\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Qを\\E(?<verb>\\Q破壊した\\E)\\Q\\E$",
+      "action": "BREAK"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Qが\\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q個の\\Ex(?<amount>\\d+)\\Qを\\E(?<verb>\\Q追加した\\E)\\Q\\E$",
+      "action": "ADD"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Qが\\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q個の\\Ex(?<amount>\\d+)\\Qを\\E(?<verb>\\Q取り出した\\E)\\Q\\E$",
+      "action": "REMOVE"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Qが\\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Qを\\E(?<verb>\\Qクリックした\\E)\\Q\\E$",
+      "action": "CLICK"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Qが\\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Qを\\E(?<verb>\\Q殺害した\\E)\\Q\\E$",
+      "action": "KILL"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Qが\\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q個の\\Ex(?<amount>\\d+)\\Qを\\E(?<verb>\\Q拾った\\E)\\Q\\E$",
+      "action": "PICKUP"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Qが\\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q個の\\Ex(?<amount>\\d+)\\Qを\\E(?<verb>\\Q落とした\\E)\\Q\\E$",
+      "action": "DROP"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Qが\\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q個の\\Ex(?<amount>\\d+)\\Qを\\E(?<verb>\\Q預け入れた\\E)\\Q\\E$",
+      "action": "DEPOSIT"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Qが\\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q個の\\Ex(?<amount>\\d+)\\Qを\\E(?<verb>\\Q引き出した\\E)\\Q\\E$",
+      "action": "WITHDRAW"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Qが\\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q個の\\Ex(?<amount>\\d+)\\Qを\\E(?<verb>\\Q投げた\\E)\\Q\\E$",
+      "action": "THROW"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Qが\\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q個の\\Ex(?<amount>\\d+)\\Qを\\E(?<verb>\\Q撃った\\E)\\Q\\E$",
+      "action": "SHOOT"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qclicked\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "CLICK"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qsheared\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "SHEAR"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qleashed\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "LEASH"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qunleashed\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "UNLEASH"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q spawned \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "SPAWN"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Qの\\E(?<verb>\\Qログイン\\E)\\Qがログに記録されます\\E$",
+      "action": "LOGIN"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Qの\\E(?<verb>\\Qログアウト\\E)\\Qがログに記録されます\\E$",
+      "action": "LOGOUT"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Qが\\E[A-Za-z0-9_.-]+\\Qとしてログインしました\\E$",
+      "action": "USERNAME"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q前\\E [+-] (?<player>[#A-Za-z0-9_.-]+):\\s*(?<message>.*)$",
+      "action": "TEXT"
+    }
+  ]
+}

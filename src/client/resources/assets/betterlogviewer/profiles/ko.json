@@ -1,0 +1,129 @@
+{
+  "id": "ko",
+  "header": "(?iu)^-----\\s+\\Q\\ECoreProtect\\s*\\|\\s*\\Q 조회 결과\\E\\s+-----$",
+  "containerHeader": "(?iu)^-----\\s+\\Q컨테이너 기록\\E\\s+-----\\s+\\(x.*\\)$",
+  "interactionHeader": "(?iu)^-----\\s+\\Q플레이어 상호작용\\E\\s+-----\\s+\\(x.*\\)$",
+  "signHeader": "(?iu)^-----\\s+\\Q표지판 메시지\\E\\s+-----\\s+\\(x.*\\)$",
+  "row": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q이(가) \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q을(를) \\E(?<verb>\\Q설치\\E)\\Q함\\E$",
+  "time": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E",
+  "timeUnits": {
+    "/m": 60,
+    "/h": 3600,
+    "/d": 86400
+  },
+  "page": "(?iu)^(?:◀\\s*)?\\Q페이지 \\E(?<page>\\d+)/(?<total>\\d+)\\Q\\E.*$",
+  "noResults": [
+    "CoreProtect - 결과를 찾을 수 없습니다.",
+    "CoreProtect - 해당 페이지에 대한 결과를 찾을 수 없습니다.",
+    "CoreProtect - 해당 페이지에 대한 데이터를 찾을 수 없습니다.",
+    "CoreProtect - 해당 위치에서 데이터(을)를 찾을 수 없습니다.",
+    "CoreProtect - 해당 위치에서 거래(을)를 찾을 수 없습니다.",
+    "CoreProtect - 해당 위치에서 상호작용(을)를 찾을 수 없습니다.",
+    "CoreProtect - 해당 위치에서 메시지(을)를 찾을 수 없습니다."
+  ],
+  "searching": "CoreProtect - 조회 중입니다. 잠시만 기다려 주세요...",
+  "actions": {
+    "설치": "PLACE",
+    "파괴": "BREAK",
+    "추가": "ADD",
+    "제거": "REMOVE",
+    "클릭함": "CLICK",
+    "죽임": "KILL",
+    "획득": "PICKUP",
+    "드롭": "DROP",
+    "던짐": "THROW",
+    "발사함": "SHOOT",
+    "clicked": "CLICK",
+    "sheared": "SHEAR",
+    "leashed": "LEASH",
+    "unleashed": "UNLEASH",
+    "로그인": "LOGIN",
+    "로그아웃": "LOGOUT"
+  },
+  "rows": [
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q이(가) \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q을(를) \\E(?<verb>\\Q설치\\E)\\Q함\\E$",
+      "action": "PLACE"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q이(가) \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q을(를) \\E(?<verb>\\Q파괴\\E)\\Q함\\E$",
+      "action": "BREAK"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q이(가) \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q에서 \\Ex(?<amount>\\d+)\\Q을(를) \\E(?<verb>\\Q추가\\E)\\Q함\\E$",
+      "action": "ADD"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q이(가) \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q에서 \\Ex(?<amount>\\d+)\\Q을(를) \\E(?<verb>\\Q제거\\E)\\Q함\\E$",
+      "action": "REMOVE"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q이(가) \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q을(를) \\E(?<verb>\\Q클릭함\\E)\\Q\\E$",
+      "action": "CLICK"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q이(가) \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q을(를) \\E(?<verb>\\Q죽임\\E)\\Q\\E$",
+      "action": "KILL"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q이(가) \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q에서 \\Ex(?<amount>\\d+)\\Q을(를) \\E(?<verb>\\Q획득\\E)\\Q함\\E$",
+      "action": "PICKUP"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q이(가) \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q에서 \\Ex(?<amount>\\d+)\\Q을(를) \\E(?<verb>\\Q드롭\\E)\\Q함\\E$",
+      "action": "DROP"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q이(가) \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q에서 \\Ex(?<amount>\\d+)\\Q을(를) \\E(?<verb>\\Q추가\\E)\\Q함\\E$",
+      "action": "DEPOSIT"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q이(가) \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q에서 \\Ex(?<amount>\\d+)\\Q을(를) \\E(?<verb>\\Q제거\\E)\\Q함\\E$",
+      "action": "WITHDRAW"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q이(가) \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q에서 \\Ex(?<amount>\\d+)\\Q을(를) \\E(?<verb>\\Q던짐\\E)\\Q\\E$",
+      "action": "THROW"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q이(가) \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q에서 \\Ex(?<amount>\\d+)\\Q을(를) \\E(?<verb>\\Q발사함\\E)\\Q\\E$",
+      "action": "SHOOT"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qclicked\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "CLICK"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qsheared\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "SHEAR"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qleashed\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "LEASH"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qunleashed\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "UNLEASH"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q spawned \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "SPAWN"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q이(가) \\E(?<verb>\\Q로그인\\E)\\Q함\\E$",
+      "action": "LOGIN"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q이(가) \\E(?<verb>\\Q로그아웃\\E)\\Q함\\E$",
+      "action": "LOGOUT"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q이(가) \\E[A-Za-z0-9_.-]+\\Q으로 로그인함\\E$",
+      "action": "USERNAME"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q/m\\E|\\Q/h\\E|\\Q/d\\E)\\Q 전\\E [+-] (?<player>[#A-Za-z0-9_.-]+):\\s*(?<message>.*)$",
+      "action": "TEXT"
+    }
+  ]
+}

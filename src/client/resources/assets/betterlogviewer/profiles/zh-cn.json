@@ -1,0 +1,129 @@
+{
+  "id": "zh-cn",
+  "header": "(?iu)^-----\\s+\\Q\\ECoreProtect\\s*\\|\\s*\\Q 查询结果\\E\\s+-----$",
+  "containerHeader": "(?iu)^-----\\s+\\Q容器物品变更记录\\E\\s+-----\\s+\\(x.*\\)$",
+  "interactionHeader": "(?iu)^-----\\s+\\Q玩家交互\\E\\s+-----\\s+\\(x.*\\)$",
+  "signHeader": "(?iu)^-----\\s+\\Q告示牌消息\\E\\s+-----\\s+\\(x.*\\)$",
+  "row": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Q放置\\E)\\Q了 \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q。\\E$",
+  "time": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E",
+  "timeUnits": {
+    "分钟": 60,
+    "小时": 3600,
+    "天": 86400
+  },
+  "page": "(?iu)^(?:◀\\s*)?\\Q第 \\E(?<page>\\d+)/(?<total>\\d+)\\Q 页\\E.*$",
+  "noResults": [
+    "CoreProtect - 未找到结果。",
+    "CoreProtect - 没有在指定页面找到结果。",
+    "CoreProtect - 没有在指定页面找到数据。",
+    "CoreProtect - 此位置找不到任何数据记录。",
+    "CoreProtect - 此位置找不到任何存取记录。",
+    "CoreProtect - 此位置找不到任何交互记录。",
+    "CoreProtect - 此位置找不到任何消息记录。"
+  ],
+  "searching": "CoreProtect - 正在搜索，请稍候...",
+  "actions": {
+    "放置": "PLACE",
+    "破坏": "BREAK",
+    "放入": "ADD",
+    "取出": "REMOVE",
+    "点击": "CLICK",
+    "击杀": "KILL",
+    "拾起": "PICKUP",
+    "丢弃": "DROP",
+    "扔出": "THROW",
+    "发射": "SHOOT",
+    "clicked": "CLICK",
+    "sheared": "SHEAR",
+    "leashed": "LEASH",
+    "unleashed": "UNLEASH",
+    "登录": "LOGIN",
+    "离开": "LOGOUT"
+  },
+  "rows": [
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Q放置\\E)\\Q了 \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q。\\E$",
+      "action": "PLACE"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Q破坏\\E)\\Q了 \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q。\\E$",
+      "action": "BREAK"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Q放入\\E)\\Q了 \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q。\\E$",
+      "action": "ADD"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Q取出\\E)\\Q了 \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q。\\E$",
+      "action": "REMOVE"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Q点击\\E)\\Q了 \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q。\\E$",
+      "action": "CLICK"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Q击杀\\E)\\Q了 \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q。\\E$",
+      "action": "KILL"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Q拾起\\E)\\Q了 \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q。\\E$",
+      "action": "PICKUP"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Q丢弃\\E)\\Q了 \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q。\\E$",
+      "action": "DROP"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Q放入\\E)\\Q了 \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q。\\E$",
+      "action": "DEPOSIT"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Q取出\\E)\\Q了 \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q。\\E$",
+      "action": "WITHDRAW"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Q扔出\\E)\\Q了 \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q。\\E$",
+      "action": "THROW"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Q发射\\E)\\Q了 \\Ex(?<amount>\\d+)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q。\\E$",
+      "action": "SHOOT"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qclicked\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "CLICK"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qsheared\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "SHEAR"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qleashed\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "LEASH"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q \\E(?<verb>\\Qunleashed\\E)\\Q \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "UNLEASH"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q spawned \\E(?<material>(?:[a-z0-9_.-]+:)?[a-z0-9_]+(?:\\[[a-z0-9_=,]+])?(?:\\(↓\\))?)(?:\\s*ⓘ)?\\Q.\\E$",
+      "action": "SPAWN"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q 已\\E(?<verb>\\Q登录\\E)\\Q。\\E$",
+      "action": "LOGIN"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q 已\\E(?<verb>\\Q离开\\E)\\Q。\\E$",
+      "action": "LOGOUT"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] \\Q\\E(?<player>[#A-Za-z0-9_.-]+)\\Q 已登录为 \\E[A-Za-z0-9_.-]+\\Q。\\E$",
+      "action": "USERNAME"
+    },
+    {
+      "pattern": "(?iu)^\\Q\\E(?<age>\\d+(?:[.,]\\d+)?)\\s*(?<unit>\\Q分钟\\E|\\Q小时\\E|\\Q天\\E)\\Q前\\E [+-] (?<player>[#A-Za-z0-9_.-]+):\\s*(?<message>.*)$",
+      "action": "TEXT"
+    }
+  ]
+}
